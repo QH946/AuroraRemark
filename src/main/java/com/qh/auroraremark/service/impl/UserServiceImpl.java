@@ -14,10 +14,10 @@ import com.qh.auroraremark.mapper.UserMapper;
 import com.qh.auroraremark.service.IUserService;
 import com.qh.auroraremark.utils.RegexUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,12 +30,19 @@ import static com.qh.auroraremark.utils.SystemConstants.USER_NICK_NAME_PREFIX;
 @Service
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
-    @Autowired
+    @Resource
     private IUserService userService;
-    @Autowired
+    @Resource
     private StringRedisTemplate stringRedisTemplate;
 
 
+    /**
+     * 用户登录
+     *
+     * @param loginForm 登录表单
+     * @param session   会话
+     * @return {@link Result}
+     */
     @Override
     public Result login(LoginFormDTO loginForm, HttpSession session) {
         // 1.校验手机号
@@ -53,7 +60,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
 
         // 4.一致，根据手机号查询用户 select * from tb_user where phone = ?
-        User user = query().eq("phone", phone).one();
+        User user = this.query().eq("phone", phone).one();
 
         // 5.判断用户是否存在
         if (user == null) {
@@ -81,14 +88,29 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     }
 
+    /**
+     * 发送手机短信验证码
+     *
+     * @param phone   电话
+     * @param session 会话
+     * @return {@link Result}
+     */
     @Override
     public Result sedCode(String phone, HttpSession session) {
+        // 1.校验手机号
         if (RegexUtils.isPhoneInvalid(phone)) {
-            return Result.fail("手机格式错误");
+            // 2.如果不符合，返回错误信息
+            return Result.fail("手机号格式错误！");
         }
+        // 3.符合，生成验证码
         String code = RandomUtil.randomNumbers(6);
-        session.setAttribute("code", code);
-        log.debug("发送验证码成功，验证码：{}", code);
+
+        // 4.保存验证码到 session
+        stringRedisTemplate.opsForValue().set(LOGIN_CODE_KEY + phone, code, LOGIN_CODE_TTL, TimeUnit.MINUTES);
+
+        // 5.发送验证码
+        log.debug("发送短信验证码成功，验证码：{}", code);
+        // 返回ok
         return Result.ok();
     }
 
@@ -97,6 +119,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return null;
     }
 
+    /**
+     * 创建新用户并保存
+     *
+     * @param phone 电话
+     * @return {@link User}
+     */
     private User createUserWithPhone(String phone) {
         // 1.创建用户
         User user = new User();
