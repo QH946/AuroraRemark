@@ -1,6 +1,12 @@
 package com.qh.auroraremark.utils;
 
 
+/**
+ * 正则表达式模式
+ *
+ * @author qh
+ * @date 2022/10/13 21:27:18
+ */
 public abstract class RegexPatterns {
     /**
      * 手机号正则

@@ -1,5 +1,11 @@
 package com.qh.auroraremark.utils;
 
+/**
+ * 系统常量
+ *
+ * @author qh
+ * @date 2022/10/13 21:26:31
+ */
 public class SystemConstants {
     public static final String IMAGE_UPLOAD_DIR = "D:\\02_Environment\\nginx-1.18.0\\html\\hmdp\\imgs\\";
     public static final String USER_NICK_NAME_PREFIX = "user_";

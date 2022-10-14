@@ -17,6 +17,12 @@ import java.util.function.Function;
 import static com.qh.auroraremark.utils.RedisConstants.CACHE_NULL_TTL;
 import static com.qh.auroraremark.utils.RedisConstants.LOCK_SHOP_KEY;
 
+/**
+ * 处理缓存穿透、击穿等工具类
+ *
+ * @author qh
+ * @date 2022/10/13 21:23:45
+ */
 @Slf4j
 @Component
 public class CacheClient {
