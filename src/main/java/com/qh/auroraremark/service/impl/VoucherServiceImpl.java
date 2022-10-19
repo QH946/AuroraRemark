@@ -26,7 +26,7 @@ public class VoucherServiceImpl extends ServiceImpl<VoucherMapper, Voucher> impl
     private StringRedisTemplate stringRedisTemplate;
 
     /**
-     * 查询优惠卷
+     * 查询店铺的优惠卷
      *
      * @param shopId 商店id
      * @return {@link Result}
@@ -40,12 +40,12 @@ public class VoucherServiceImpl extends ServiceImpl<VoucherMapper, Voucher> impl
     }
 
     /**
-     * 添加优惠卷
+     * 添加秒杀卷
      *
      * @param voucher 凭证
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     public void addSeckillVoucher(Voucher voucher) {
         // 保存优惠券
         save(voucher);

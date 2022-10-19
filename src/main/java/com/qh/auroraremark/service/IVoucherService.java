@@ -9,7 +9,7 @@ import com.qh.auroraremark.entity.Voucher;
 public interface IVoucherService extends IService<Voucher> {
 
     /**
-     * 查询优惠卷
+     * 查询店铺的优惠卷
      *
      * @param shopId 商店id
      * @return {@link Result}
@@ -17,7 +17,7 @@ public interface IVoucherService extends IService<Voucher> {
     Result queryVoucherOfShop(Long shopId);
 
     /**
-     * 添加优惠卷
+     * 添加秒杀卷
      *
      * @param voucher 凭证
      */
