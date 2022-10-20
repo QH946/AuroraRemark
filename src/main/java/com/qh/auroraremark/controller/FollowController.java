@@ -1,13 +1,50 @@
 package com.qh.auroraremark.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.qh.auroraremark.dto.Result;
+import com.qh.auroraremark.service.IFollowService;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import javax.annotation.Resource;
 
 
 @RestController
 @RequestMapping("/follow")
 public class FollowController {
+    @Resource
+    private IFollowService followService;
 
+    /**
+     * 关注
+     *
+     * @param followUserId 遵循用户id
+     * @param isFollow     是遵循
+     * @return {@link Result}
+     */
+    @PutMapping("/{id}/{isFollow}")
+    public Result follow(@PathVariable("id") Long followUserId, @PathVariable("isFollow") Boolean isFollow) {
+        return followService.follow(followUserId, isFollow);
+    }
+
+    /**
+     * 查询是否关注
+     *
+     * @param followUserId 遵循用户id
+     * @return {@link Result}
+     */
+    @GetMapping("/or/not/{id}")
+    public Result isFollow(@PathVariable("id") Long followUserId) {
+        return followService.isFollow(followUserId);
+    }
+
+    /**
+     * 共同关注
+     *
+     * @param id id
+     * @return {@link Result}
+     */
+    @GetMapping("/common/{id}")
+    public Result followCommons(@PathVariable("id") Long id){
+        return followService.followCommons(id);
+    }
 }

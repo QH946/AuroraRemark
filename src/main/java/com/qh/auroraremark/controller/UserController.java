@@ -1,9 +1,11 @@
 package com.qh.auroraremark.controller;
 
 
+import cn.hutool.core.bean.BeanUtil;
 import com.qh.auroraremark.dto.LoginFormDTO;
 import com.qh.auroraremark.dto.Result;
 import com.qh.auroraremark.dto.UserDTO;
+import com.qh.auroraremark.entity.User;
 import com.qh.auroraremark.entity.UserInfo;
 import com.qh.auroraremark.service.IUserInfoService;
 import com.qh.auroraremark.service.IUserService;
@@ -26,13 +28,14 @@ public class UserController {
     @Resource
     private IUserInfoService userInfoService;
 
+
     /**
      * 发送手机验证码
      */
     @PostMapping("code")
     public Result sendCode(@RequestParam("phone") String phone, HttpSession session) {
 
-        return userService.sedCode(phone,session);
+        return userService.sedCode(phone, session);
     }
 
 
@@ -44,9 +47,9 @@ public class UserController {
      * @return {@link Result}
      */
     @PostMapping("/login")
-    public Result login(@RequestBody LoginFormDTO loginForm, HttpSession session){
+    public Result login(@RequestBody LoginFormDTO loginForm, HttpSession session) {
 
-        return userService.login(loginForm,session);
+        return userService.login(loginForm, session);
     }
 
 
@@ -56,7 +59,7 @@ public class UserController {
      * @return {@link Result}
      */
     @PostMapping("/logout")
-    public Result logout(){
+    public Result logout() {
         UserHolder.removeUser();
         return Result.ok("登出成功");
     }
@@ -67,13 +70,13 @@ public class UserController {
      * @return {@link Result}
      */
     @GetMapping("/me")
-    public Result me(){
+    public Result me() {
         UserDTO user = UserHolder.getUser();
         return Result.ok(user);
     }
 
     @GetMapping("/info/{id}")
-    public Result info(@PathVariable("id") Long userId){
+    public Result info(@PathVariable("id") Long userId) {
         // 查询详情
         UserInfo info = userInfoService.getById(userId);
         if (info == null) {
@@ -85,4 +88,24 @@ public class UserController {
         // 返回
         return Result.ok(info);
     }
+
+    /**
+     * 根据id查询用户
+     *
+     * @param userId 用户id
+     * @return {@link Result}
+     */
+    @GetMapping("/{id}")
+    public Result queryUserById(@PathVariable("id") Long userId) {
+        // 查询详情
+        User user = userService.getById(userId);
+        if (user == null) {
+            return Result.ok();
+        }
+        UserDTO userDTO = BeanUtil.copyProperties(user, UserDTO.class);
+        // 返回
+        return Result.ok(userDTO);
+    }
+
+
 }

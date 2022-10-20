@@ -30,8 +30,7 @@ import static com.qh.auroraremark.utils.SystemConstants.USER_NICK_NAME_PREFIX;
 @Service
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
-    @Resource
-    private IUserService userService;
+
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
@@ -84,7 +83,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return Result.fail("验证码错误");
         }
         // 4.一致，根据手机号查询用户 select * from tb_user where phone = ?
-        User user = query().eq("phone", phone).one();
+        User user = this
+                .query()
+                .eq("phone", phone)
+                .one();
         // 5.判断用户是否存在
         if (user == null) {
             // 6.不存在，创建新用户并保存

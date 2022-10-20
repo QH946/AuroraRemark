@@ -28,4 +28,6 @@ public interface IUserService extends IService<User> {
     Result sedCode(String phone, HttpSession session);
 
     Result sign();
+
+
 }
