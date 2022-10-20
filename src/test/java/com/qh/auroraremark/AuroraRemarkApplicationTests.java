@@ -70,7 +70,10 @@ class AuroraRemarkApplicationTests {
         // 1.查询店铺信息
         List<Shop> list = shopService.list();
         // 2.把店铺分组，按照typeId分组，typeId一致的放到一个集合
-        Map<Long, List<Shop>> map = list.stream().collect(Collectors.groupingBy(Shop::getTypeId));
+        Map<Long, List<Shop>> map =
+                list.stream()
+                        .collect(Collectors
+                                .groupingBy(Shop::getTypeId));
         // 3.分批完成写入Redis
         for (Map.Entry<Long, List<Shop>> entry : map.entrySet()) {
             // 3.1.获取类型id
@@ -98,7 +101,7 @@ class AuroraRemarkApplicationTests {
         for (int i = 0; i < 1000000; i++) {
             j = i % 1000;
             values[j] = "user_" + i;
-            if(j == 999){
+            if (j == 999) {
                 // 发送到Redis
                 stringRedisTemplate.opsForHyperLogLog().add("hl2", values);
             }

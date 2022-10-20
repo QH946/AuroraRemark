@@ -24,7 +24,7 @@ public interface IShopService extends IService<Shop> {
     Result update(Shop shop);
 
     /**
-     * 根据商铺类型分页查询商铺信息
+     * 查询附近商户
      *
      * @param typeId  id类型
      * @param current 当前
