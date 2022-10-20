@@ -1,8 +1,8 @@
 # AuroraRemark
 为深入学习redis而肝的项目，初定为曙光点评，寓意以曙光评判世界（项目原型为黑马点评）
 
-##技术栈
-###后端
+## 技术栈
+### 后端
 Spring 相关：
 Spring Boot 2.x
 Spring MVC
@@ -21,13 +21,13 @@ Redisson：基于 Redis 的分布式数据网格
 HuTool：工具库合集
 Lombok：注解式代码生成工具
 
-###前端
+### 前端
 原生 HTML、CSS、JS 三件套
 Vue 2（渐进式使用）
 Element UI 组件库
 axios 请求库
 
-###目录
+### 目录
 config 目录：存放项目依赖相关配置
 MvcConfig：配置了登录、自动刷新登录 Token 的拦截器
 MybatisConfig：配置 MyBatis Plus 分页插件
