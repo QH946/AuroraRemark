@@ -44,15 +44,23 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
     @Resource
     private IFollowService followService;
 
+    /**
+     * 查看探店笔记
+     *
+     * @param id id
+     * @return {@link Result}
+     */
     @Override
     public Result queryBlogById(Long id) {
         //查询blog
-        Blog blog = this.getById(id);
+        Blog blog = getById(id);
         if (blog == null) {
-            return Result.fail("笔记不存在");
+            return Result.fail("笔记不存在！");
         }
-        //查询与blog有关的用户
+        //查询与blog相关关的用户
         queryBlogUser(blog);
+        //查询blog是否被点赞
+        isBlogLiked(blog);
         return Result.ok(blog);
     }
 

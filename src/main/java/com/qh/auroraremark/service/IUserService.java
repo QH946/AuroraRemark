@@ -27,7 +27,18 @@ public interface IUserService extends IService<User> {
      */
     Result sedCode(String phone, HttpSession session);
 
+    /**
+     * 用户签到
+     *
+     * @return {@link Result}
+     */
     Result sign();
 
 
+    /**
+     * 统计签到次数
+     *
+     * @return {@link Result}
+     */
+    Result signCount();
 }

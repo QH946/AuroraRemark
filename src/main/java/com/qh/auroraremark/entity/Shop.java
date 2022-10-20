@@ -97,6 +97,9 @@ public class Shop implements Serializable {
     private LocalDateTime updateTime;
 
 
+    /**
+     * 店铺距离
+     */
     @TableField(exist = false)
     private Double distance;
 }

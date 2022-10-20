@@ -6,7 +6,6 @@ import com.qh.auroraremark.dto.Result;
 import com.qh.auroraremark.dto.UserDTO;
 import com.qh.auroraremark.entity.Blog;
 import com.qh.auroraremark.service.IBlogService;
-import com.qh.auroraremark.service.IUserService;
 import com.qh.auroraremark.utils.SystemConstants;
 import com.qh.auroraremark.utils.UserHolder;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +20,7 @@ public class BlogController {
 
     @Resource
     private IBlogService blogService;
-    @Resource
-    private IUserService userService;
+
 
     /**
      * 保存探店笔记并推送到粉丝的收件箱
@@ -46,6 +44,12 @@ public class BlogController {
         return blogService.queryBlogLikes(id);
     }
 
+    /**
+     * 点赞
+     *
+     * @param id id
+     * @return {@link Result}
+     */
     @PutMapping("/like/{id}")
     public Result likeBlog(@PathVariable("id") Long id) {
         return blogService.likeBlog(id);

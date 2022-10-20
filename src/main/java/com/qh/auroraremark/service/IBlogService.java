@@ -56,4 +56,5 @@ public interface IBlogService extends IService<Blog> {
      * @return {@link Result}
      */
     Result queryBlogOfFollow(Long max, Integer offset);
+
 }
