@@ -29,11 +29,11 @@ axios 请求库
 
 ###目录
 config 目录：存放项目依赖相关配置
-
 MvcConfig：配置了登录、自动刷新登录 Token 的拦截器
 MybatisConfig：配置 MyBatis Plus 分页插件
 RedissonConfig：创建单例 Redisson 客户端
 WebExceptionAdvice：全局响应拦截器
+
 controller 目录：存放 Restful 风格的 API 接口
 
 dto 目录：存放业务封装类，如 Result 通用响应封装（不推荐学习它的写法）
@@ -46,16 +46,22 @@ service 目录：存放业务逻辑处理代码，需要重点学习
 
 BlogServiceImpl：
 基于 Redis 实现点赞、按时间排序的点赞排行榜；基于 Redis 实现拉模式的 Feed 流，推荐学习
+
 FollowServiceImpl：
 基于 Redis 集合实现关注、共同关注，推荐学习
+
 ShopServiceImpl：
 基于 Redis 缓存优化店铺查询性能；基于 Redis GEO 实现附近店铺按距离排序，推荐学习
+
 UserServiceImpl：
 基于 Redis 实现短信登录（分布式 Session），推荐学习（虽然没有真的实现短信登录，而是通过日志打印验证码代替）
+
 VoucherOrderServiceImpl：
 基于 Redis 分布式锁、Redis + Lua 两种方式，结合消息队列，共同实现了秒杀和一人一单功能，非常值得学习
+
 VoucherServiceImpl：
 添加优惠券，并将库存保存在 Redis 中，为秒杀做准备。
+
 utils 目录：
 存放项目内通用的工具类，需要重点学习
 
