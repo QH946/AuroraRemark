@@ -77,3 +77,6 @@ SimpleRedisLock：
 简单的 Redis 锁实现，了解即可，一般用 Redisson
 UserHolder：
 线程内缓存用户信息，可以学习
+
+>注：启动之前，在Redis中添加消费者组
+> XGROUP CREATE stream.orders g1 $ MKSTREAM

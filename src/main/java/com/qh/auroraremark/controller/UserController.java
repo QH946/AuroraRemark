@@ -38,7 +38,6 @@ public class UserController {
         return userService.sedCode(phone, session);
     }
 
-
     /**
      * 用户登录
      *
@@ -51,7 +50,6 @@ public class UserController {
 
         return userService.login(loginForm, session);
     }
-
 
     /**
      * 用户登出
@@ -71,10 +69,16 @@ public class UserController {
      */
     @GetMapping("/me")
     public Result me() {
-        UserDTO user = UserHolder.getUser();
-        return Result.ok(user);
+        //获取当前登录的用户并返回
+        return Result.ok(UserHolder.getUser());
     }
 
+    /**
+     * 查看用户信息
+     *
+     * @param userId 用户id
+     * @return {@link Result}
+     */
     @GetMapping("/info/{id}")
     public Result info(@PathVariable("id") Long userId) {
         // 查询详情
@@ -113,7 +117,7 @@ public class UserController {
      * @return {@link Result}
      */
     @PostMapping("/sign")
-    public Result sign(){
+    public Result sign() {
         return userService.sign();
     }
 
@@ -123,7 +127,7 @@ public class UserController {
      * @return {@link Result}
      */
     @GetMapping("/sign/count")
-    public Result signCount(){
+    public Result signCount() {
         return userService.signCount();
     }
 }

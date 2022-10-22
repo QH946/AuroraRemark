@@ -30,7 +30,7 @@ public interface IBlogService extends IService<Blog> {
      * @param id id
      * @return {@link Result}
      */
-    Result queryBlogLikes(Long id);
+    Result queryBlogLikesById(Long id);
 
     /**
      * 点赞

@@ -34,14 +34,25 @@ public class BlogController {
     }
 
     /**
+     * 通过id查询博客
+     *
+     * @param id id
+     * @return {@link Result}
+     */
+    @GetMapping("/{id}")
+    public Result queryBlogById(@PathVariable("id") Long id) {
+        return blogService.queryBlogById(id);
+    }
+
+    /**
      * 查询点赞排行榜
      *
      * @param id id
      * @return {@link Result}
      */
     @GetMapping("/likes/{id}")
-    public Result queryBlogLikes(@PathVariable("id") Long id) {
-        return blogService.queryBlogLikes(id);
+    public Result queryBlogLikesById(@PathVariable("id") Long id) {
+        return blogService.queryBlogLikesById(id);
     }
 
     /**

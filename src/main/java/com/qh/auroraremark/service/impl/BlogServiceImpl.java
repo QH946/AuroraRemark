@@ -90,7 +90,7 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
      * @return {@link Result}
      */
     @Override
-    public Result queryBlogLikes(Long id) {
+    public Result queryBlogLikesById(Long id) {
         String key = BLOG_LIKED_KEY + id;
         //查询top5的点赞用户 zrange key 0 4
         Set<String> top5 = stringRedisTemplate.opsForZSet().range(key, 0, 4);
